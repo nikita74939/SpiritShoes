@@ -1,4 +1,4 @@
-const questions1 = [
+const questions2 = [
     {
         question : "Kamu tiba di desa kecil yang ramai dengan festival.",
         answer: {
@@ -157,7 +157,7 @@ const questions1 = [
     },
 ];
 
-const questions2 = [
+const questions1 = [
     {
         question : "You arrive in a small village bustling with a festival.",
         answer: {
@@ -323,27 +323,24 @@ const resultOptions = {
 }
 
 let currentQuestion = 0;
+let language = '';
+let userAnswers = {};
 
-let language = "indonesia";
+document.getElementById('btn-english').addEventListener('click', function() {
+    language = 'english';
+    showStartPage();
+});
 
-function displayQuestion() {
-    const quizElement = document.getElementById('quiz');
-    if (language == "indonesia") {
-        const question = questions1[currentQuestion];
-    } else {
-        const question = questions2[currentQuestion];
-    }
-    if (question) {
-        let html = `<p>${question.question}</p>`;
-        if (question.image) {
-            html += `<img src="${question.image}" alt"Question ${currentQuestion + 1}">`;
-        }
-        for (const option in question.answer) {
-            html += `<button class="large-rectangular" value="${option}"> id="${option}">${question.answers[option].text}</button>`
-        }
-        quizElement.innerHTML = html;
-        attachButtonClickHandlers();
-    }
+document.getElementById('btn-indonesia').addEventListener('click', function() {
+    language = 'indonesia';
+    showStartPage();
+});
+
+function showStartPage() {
+    document.getElementById('language-page').style.display = 'none';
+    document.getElementById('start-page').style.display = 'block';
+    const story = (language === 'english') ? 'The story begins with you, an adventurer ready to explore a new world. Every choice you make in this journey will reveal your personality. Choose wisely and follow the storyline!' : 'Kisah dimulai denganmu, seorang petualang yang siap menjelajahi dunia baru. Setiap langkah yang kamu ambil dalam petualangan ini akan menentukan kepribadianmu. Pilihlah dengan bijak dan ikuti alur ceritanya!';
+    document.getElementById('story').innerText = story;
 }
 
 document.getElementById('start-button').addEventListener('click', function(){
@@ -351,8 +348,24 @@ document.getElementById('start-button').addEventListener('click', function(){
     document.getElementById('quiz-page').style.display = 'block';
     currentQuestion = 0;
     userAnswers = {};
-    currentQuestion();
+    displayQuestion();
 });
+
+function displayQuestion() {
+    const quizElement = document.getElementById('quiz');
+    const questions = (language === 'english') ? questions1 : questions2;
+    const question = questions[currentQuestion];
+
+    if (question) {
+        let html = `<h1>${question.question}</h1>`;
+        html += `<p>which one is you</p>`
+        for (const option in question.answer) {
+            html += `<button class="large-rectangular" value="${option}" id="${option}">${question.answer[option].text}</button>`;
+        }
+        quizElement.innerHTML = html;
+        attachButtonClickHandlers();
+    }
+}
 
 function attachButtonClickHandlers() {
     const choiceButtons = document.querySelectorAll('.large-rectangular');
@@ -362,16 +375,16 @@ function attachButtonClickHandlers() {
 }
 
 function handleAnswer(event) {
-    const selectedOption = event.target;
-    const answerKey = selectedOption.value;
+    const selectedOption = event.target.value;
+    const questions = (language === 'english') ? questions1 : questions2;
     const question = questions[currentQuestion];
-    const answer = question.answer[answerKey];
+    const answer = question.answer[selectedOption];
 
-    for (const dimension in answer.scores) {
-        userAnswer[dimension] = (userAnswer[dimension] || 0)+ answer.scores[dimention];
+    for (const dimension in answer.score) {
+        userAnswers[dimension] = (userAnswers[dimension] || 0) + answer.score[dimension];
     }
 
-    if (currentQuestion < question.length - 1) {
+    if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         displayQuestion();
     } else {
@@ -380,7 +393,7 @@ function handleAnswer(event) {
 }
 
 function showResult() {
-    const resultElement = document.getElementById('result');
+    const resultElement = document.getElementById('result-page');
     const resultTextContainer = document.querySelector('.result-text');
     const resultImage = document.getElementById('result-image');
     const topLetters = {};
@@ -389,20 +402,23 @@ function showResult() {
     pairs.forEach(pair => {
         const options = pair.split('');
         const scores = options.map(option => userAnswers[option] || 0);
-        const topOptionIndex = scores.indexOf(Math.max(...score));
+        const topOptionIndex = scores.indexOf(Math.max(...scores));
         const topOption = options[topOptionIndex];
         topLetters[pair] = topOption;
     });
 
+    const result = topLetters.IE + topLetters.NS + topLetters.TF + topLetters.PJ;
     const personalityData = resultOptions[result];
+    
     if (personalityData) {
         resultTextContainer.innerHTML = `
+            <h2>${personalityData.title}</h2>
+            <p>${personalityData.description}</p>
         `;
-
-        resultImage.src = "images/"+personalityData.image;
-        resultImage.alt = `${personalityData.image} Image`;
+        resultImage.src = `images/${personalityData.image}`;
+        resultImage.alt = `${personalityData.title} Image`;
     }
 
-    document.getElementById('quiz').style.display = 'none';
-    document.getElementById('result').style.display = 'bloct';
+    document.getElementById('quiz-page').style.display = 'none';
+    resultElement.style.display = 'block';
 }

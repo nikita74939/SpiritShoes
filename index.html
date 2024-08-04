@@ -13,27 +13,47 @@
 
 </head>
 <body>
-    <div class="main">
-        <h1>Get Your Spirit Shoes</h1>
-        <h2>a personality quiz</h2>
-        <p>select your language</p>
+    <div class="language-page" id="language-page">
+        <div>
+            <h1>Get Your Spirit Shoes</h1>
+            <h2>a personality quiz</h2>
+            <p>select your language</p>
+        </div>
 
         <div class="lang-button">
-            <div class="eng-button language-button">
-                <button>english</button>
+            <div>
+                <button class="language-button" id="btn-english">english</button>
             </div>
-            <div class="idn-button language-button">
-                <button>indonesia</button>
+            <div>
+                <button class="language-button" id="btn-indonesia">indonesia</button>
             </div>
         </div>
     </div>
 
-    <div class="welcome">
+    <div class="start-page" id="start-page" style="display: none;">
+        <h1>Welcome!</h1>
+        <div class="story">
+            <p id="story"></p>
+            <button id="start-button">Let's go</button>
+        </div>
+    </div>
+
+    <div class="quiz-page" id="quiz-page" style="display: none;">
+        <div class="quiz" id="quiz">
+            
+        </div>
+    </div>
+
+    <div class="result" id="result" style="display: none;">
         
     </div>
+
     <footer>
         <p>&copy; 2024 Nikita</p>
     </footer>
+
+    <script src="javascript/scripst.js"></script>
+     
     
 </body>
 </html>

@@ -18,16 +18,17 @@ body {
     text-align: center;
 }
 
-.main {
+/* language page */
+
+.language-page {
     height: 80vh;
     align-content: center;
     text-align: center;
     color: #3f1303;
     margin-bottom: 64px;
-    display: block;
 }
 
-.main h1 {
+.language-page h1 {
     margin: 0 32px;
     font-family: "Rancho";
     font-size: 45px;
@@ -35,7 +36,7 @@ body {
     word-spacing: 2px;
 }
 
-.main h2 {
+.language-page h2 {
     margin-top: 16px;
     font-family: "Amarante", serif;
     font-size: 20px;
@@ -43,7 +44,7 @@ body {
     letter-spacing: 1px;
 }
 
-.main p {
+.language-page p {
     margin-top: 40px;
     font-family: 'Baskervville';
     font-size: 12px;
@@ -60,19 +61,95 @@ body {
     padding: 16px;
     border-radius: 16px;
     border-style: solid;
-    border-color: #5AA87C40;
+    border-color: #5aa87c;
 }
 
-.welcome {
+/* start page */
+
+.start-page {
     height: 80vh;
     align-content: center;
     text-align: center;
     color: #3f1303;
     margin-bottom: 64px;
-    display: none;
+    justify-items: center;
 }
 
+.start-page h1 {
+    color: #3f1303f6;
+    margin-top: 32px;
+    font-family: "Rancho";
+    font-size: 45px;
+    letter-spacing: 3px;
+    word-spacing: 2px;
+}
 
+.story {
+    color: #3f1303f6;
+    margin: 48px;
+    padding: 32px;
+    padding-bottom: 16PX;
+    font-family: "Amarante", serif;
+    background-color: #E4CB6840;
+    border-style: solid;
+    border-radius: 16px;
+    border-color:#5aa87c;
+}
+
+.story button {
+    position: relative;
+    margin-top: 80px;
+    font-family: "Amarante", serif;
+    padding: 8px 20px;
+    background-color: #52B6E459;
+    border-radius: 16px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #5aa87c;
+    translate: 90%;
+}
+
+/* quiz page */
+.quiz-page {
+    height: 80vh;
+    align-content: center;
+    text-align: center;
+    color: #3f1303;
+    margin-bottom: 64px;
+    justify-items: center;
+}
+
+.quiz h1 {
+    margin: 48px;
+    margin-top: 16px;
+    padding: 32px;
+    font-family: "Amarante", serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #3f1303f6;
+    background-color: #E4CB6840;
+    border-style: solid;
+    border-radius: 16px;
+    border-color: #5aa87cd4;
+}
+
+.quiz p {
+    font-family: 'Baskervville';
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.large-rectangular {
+    margin: 8px 60px;
+    padding: 16px;
+    font-family: "Amarante", serif;
+    font-size: 14px;
+    color: #3f1303d2;
+    border-radius: 20px;
+    background-color: #52b6e473;
+}
+
+/* footer */
 
 footer {
     font-family: 'Times New Romans';
